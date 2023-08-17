@@ -21,7 +21,7 @@ import com.pronto.coding.assessment.validation.InputRequestValidation;
 @RestController
 @RequestMapping("/convert")
 public class NumberToWordController {
-	
+
 	@Autowired
 	InputRequestValidation reqValidation;
 	@Autowired
@@ -30,13 +30,13 @@ public class NumberToWordController {
 	@PostMapping("/numberToWord")
 	public String getWordFromNumber(@RequestBody InputRequest inputReq) {
 
-		String response = "";
-		String errMsg = "";
-
+		String response = Constants.BLANK;
+		String errMsg = Constants.BLANK;
+		
 		errMsg = reqValidation.validateInputRequest(inputReq);
-		if(errMsg != null && errMsg.equals(Constants.BLANK)) {
+		if (errMsg != null && errMsg.equals(Constants.BLANK)) {
 			response = numberService.getWord(inputReq);
-		}else {
+		} else {
 			response = errMsg;
 		}
 

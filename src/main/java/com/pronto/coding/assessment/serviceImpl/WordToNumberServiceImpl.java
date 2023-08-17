@@ -10,11 +10,11 @@ import com.pronto.coding.assessment.service.WordToNumberService;
 import com.pronto.coding.assessment.utility.Constants;
 
 /**
- * @author Priyanka
+ * @author Priyanka Vaithiyanathan
  *
  */
 @Service
-public class WordToNumberServiceImpl implements WordToNumberService{
+public class WordToNumberServiceImpl implements WordToNumberService {
 
 	/**
 	 * getWord
@@ -51,9 +51,7 @@ public class WordToNumberServiceImpl implements WordToNumberService{
 	 * @return String string representation of the number
 	 */
 	private String convertUpto99(int number) {
-		if (number <= 0 || number > 99) {
-			return "Number entered is out of bounds";
-		} else if (number < 20) {
+		if (number < 20) {
 			return numberNames[number];
 		} else {
 			return tenNames[number / 10] + " " + numberNames[number % 10];
@@ -68,19 +66,17 @@ public class WordToNumberServiceImpl implements WordToNumberService{
 	 */
 	private String convertUpto999(int number) {
 		StringBuilder word = new StringBuilder("");
-		if (number <= 0 || number > 999) {
-			return "Number entered is out of bounds";
-		} else if (number < 100) {
+		if (number < 100) {
 			return convertUpto99(number);
 		} else {
 			word.append(numberNames[number / 100]);
 			number %= 100;
 			if (number == 0) {
-				word.append(" Hundred");
+				word.append(Constants.Hundred);
 				return word.toString();
 			}
-			word.append(" Hundred ");
-			return word.append("And " + convertUpto99(number).toString()).toString();
+			word.append(Constants.Hundred);
+			return word.append(Constants.And + convertUpto99(number).toString()).toString();
 		}
 	}
 
@@ -92,20 +88,18 @@ public class WordToNumberServiceImpl implements WordToNumberService{
 	 */
 	private String convertUpto999999(int number) {
 		StringBuilder word = new StringBuilder("");
-		if (number <= 0 || number > 999999) {
-			return "Number entered is out of bounds";
-		} else if (number < 1000) {
+		if (number < 1000) {
 			return convertUpto999(number);
 		} else {
 			word.append(convertUpto999(number / 1000));
 			number %= 1000;
 			if (number == 0) {
-				word.append(" Thousand");
+				word.append(Constants.Thousand);
 				return word.toString();
 			} else if (number < 100 || number / 100 < 9) {
-				word.append(" Thousand, ");
+				word.append(Constants.Thousand + ",");
 			} else {
-				word.append(" Thousand ");
+				word.append(Constants.Thousand);
 			}
 			return word.append(convertUpto999(number).toString()).toString();
 		}

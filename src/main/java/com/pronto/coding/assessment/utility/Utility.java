@@ -23,7 +23,7 @@ public class Utility {
 		 */
 			  public static String getValidationMsg(String key) {
 			  
-			  String value = "";
+			  String value = Constants.BLANK;
 			  
 			  try { value = validationMessage.getString(key); } catch
 			  (MissingResourceException exception) { value =
